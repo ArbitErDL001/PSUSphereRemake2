@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <h4 class="page-title">Programs</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">List of Programs</div>
+            <div class="card-category">Program Records</div>
+          </div>
+
+          <div class="card-body">
+            <div class="row mb-3">
+              <!-- Search Bar -->
+              <div class="col-md-6">
+                <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'program-list' %}">
+                  <div class="input-group">
+                    <input type="text" placeholder="Search ..." class="form-control" name="q"/>
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="la la-search search-icon"></i>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Add Program Button -->
+              <div class="col-md-6 text-right">
+                <a href="{% url 'program-add' %}" class="btn btn-success btn-rounded">
+                  Add Program
+                </a>
+              </div>
+            </div>
+
+            <!-- Sort Form -->
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <form method="get" class="form-inline">
+                  <label for="smallSelect" class="mr-2">Sort by</label>
+                  <select class="form-control form-control-sm mr-2" id="smallSelect" name="sort_by">
+                    <option value="prog_name" {% if request.GET.sort_by == "prog_name" %}selected{% endif %}>Program Name</option>
+                    <option value="college__college_name" {% if request.GET.sort_by == "college__college_name" %}selected{% endif %}>College</option>
+                  </select>
+                  <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <table class="table table-striped mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Program Name</th>
+                  <th scope="col">College</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for program in programs %}
+                <tr>
+                  <td>{{ program.prog_name }}</td>
+                  <td>{{ program.college }}</td>
+                  <td>
+                    <a href="{% url 'program-update' program.pk %}" class="btn btn-primary btn-sm">
+                      <i class="la la-edit"></i> Edit
+                    </a>
+                    <a href="{% url 'program-delete' program.pk %}" class="btn btn-danger btn-sm">
+                      <i class="la la-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="3" class="text-center">
+                    <p class="text-sm font-weight-bold mb-0">No Records Found</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            {% include 'includes/pagination.html' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

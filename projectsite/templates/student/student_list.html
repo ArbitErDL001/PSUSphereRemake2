@@ -1,0 +1,80 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <h4 class="page-title">Students</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">List of Students</div>
+            <div class="card-category">Student Records</div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6">
+              <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'student-list' %}">
+                <div class="input-group">
+                  <input type="text" placeholder="Search ..." class="form-control" name="q"/>
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="la la-search search-icon"></i>
+                    </span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <div class="pull-right">
+                <a href="{% url 'student-add' %}" class="btn btn-success btn-rounded">
+                  Add Student
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Student ID</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Middle Name</th>
+                  <th scope="col">Program</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for student in students %}
+                <tr>
+                  <td>{{ student.student_id }}</td>
+                  <td>{{ student.lastname }}</td>
+                  <td>{{ student.firstname }}</td>
+                  <td>{{ student.middlename|default:"-" }}</td>
+                  <td>{{ student.program }}</td>
+                  <td>
+                    <a href="{% url 'student-update' student.pk %}" class="btn btn-primary btn-sm">
+                      <i class="la la-edit"></i> Edit
+                    </a>
+                    <a href="{% url 'student-delete' student.pk %}" class="btn btn-danger btn-sm">
+                      <i class="la la-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="6" style="text-align: center">
+                    <p class="text-sm font-weight-bold mb-0">No Records Found</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% include 'includes/pagination.html' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
