@@ -39,9 +39,9 @@
             <!-- Sort Form -->
             <div class="row mb-3">
               <div class="col-md-12">
-                <form method="get" class="form-inline">
-                  <label for="smallSelect" class="mr-2">Sort by</label>
-                  <select class="form-control form-control-sm mr-2" id="smallSelect" name="sort_by">
+                <form method="get" class="row g-2 align-items-center">
+                  <label for="smallSelect" class="col-form-label">Sort by</label>
+                  <select class="form-control form-control-sm" id="smallSelect" name="sort_by">
                     <option value="prog_name" {% if request.GET.sort_by == "prog_name" %}selected{% endif %}>Program Name</option>
                     <option value="college__college_name" {% if request.GET.sort_by == "college__college_name" %}selected{% endif %}>College</option>
                   </select>

@@ -39,11 +39,10 @@
             <!-- Sort Form -->
             <div class="row mb-3">
               <div class="col-md-12">
-                <form method="get" class="form-inline">
-                  <label for="smallSelect" class="mr-2">Sort by</label>
-                  <select class="form-control form-control-sm mr-2" id="smallSelect" name="sort_by">
-                    <option value="student" {% if request.GET.sort_by == "student" %}selected{% endif %}>Student</option>
-                    <option value="organization__name" {% if request.GET.sort_by == "organization__name" %}selected{% endif %}>Organization</option>
+                <form method="get">
+                  <label>Sort by</label>
+                  <select name="sort_by" class="form-control">
+                    <option value="student__name" {% if request.GET.sort_by == "student__name" %}selected{% endif %}>Student Name</option>
                     <option value="date_joined" {% if request.GET.sort_by == "date_joined" %}selected{% endif %}>Date Joined</option>
                   </select>
                   <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>

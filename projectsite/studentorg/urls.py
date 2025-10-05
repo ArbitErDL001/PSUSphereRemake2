@@ -8,10 +8,13 @@ from studentorg.views import (
     ProgramList, ProgramCreateView, ProgramUpdateView, ProgramDeleteView,
     OrgMemberList, OrgMemberCreateView, OrgMemberUpdateView, OrgMemberDeleteView
 )
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
+    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),
     
     # Organization URLs
     path('organization_list/', OrganizationList.as_view(), name='organization-list'),
