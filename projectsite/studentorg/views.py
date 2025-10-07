@@ -9,8 +9,7 @@ from studentorg.forms import (
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.utils import timezone
-
-from django.utils import timezone
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomePageView(LoginRequiredMixin, ListView):
     model = Organization

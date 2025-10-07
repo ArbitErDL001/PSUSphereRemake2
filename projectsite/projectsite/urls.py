@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from studentorg.views import HomePageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('studentorg.urls')),
     path("accounts/", include("allauth.urls")), # allauth routes
+    path('', include('pwa.urls')),  
 ]

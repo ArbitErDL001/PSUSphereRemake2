@@ -1,4 +1,5 @@
 {% load static %}
+{% load pwa %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="{% static 'css/ready.css' %}">
     <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    {% progressive_web_app_meta %}
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <div class="wrapper">
@@ -78,7 +81,7 @@
                                         </a>
                                         <a href="#">
                                             <div class="notif-img"> 
-                                                <img src="../assets/img/profile2.jpg" alt="Img Profile">
+                                                <img src="{% static 'img/profile2.jpg' %}" alt="Img Profile">
                                             </div>
                                             <div class="notif-content">
                                                 <span class="block">
@@ -104,7 +107,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="../assets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span >Hizrian</span></span> </a>
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle"><span >Hizrian</span></span> </a>
                             <ul class="dropdown-menu dropdown-user">
                                 <li>
                                     <div class="user-box">
@@ -229,8 +232,10 @@
             </div>
         </div>
         <div class="main-panel">
-            {% block content %}
-            {% endblock %}
+            <div class="content">
+                <div class="page-inner">
+                    {% block content %}
+                    {% endblock %}
             <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
@@ -294,5 +299,6 @@
 <script src="{% static 'js/plugin/chart-circle/circles.min.js' %}"></script>
 <script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 <script src="{% static 'js/ready.min.js' %}"></script>
+{% block extra_scripts %}{% endblock %}
 </body>
 </html>
