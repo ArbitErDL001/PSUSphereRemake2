@@ -1,25 +1,29 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load widget_tweaks %}
 
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="content">
   <div class="container-fluid">
-    <h4 class="page-title">{{ object.id|yesno:"Edit,Add" }} Organization</h4>
+    <h4 class="page-title">Home</h4>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Organization Form</div>
+            <div class="card-title">{% if object %}Update Organization {% else %} Add New Organization {% endif %}</div>
+            <div class="card-category">Page Subtitle</div>
           </div>
-          <div class="card-body">
-            <form method="post">
-              {% csrf_token %}
-              {% include 'includes/form.html' %}
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{% url 'organization-list' %}" class="btn btn-danger">Cancel</a>
-              </div>
+
+          <div class="col-md-6">
+            <div class="card-body">
+              <form class="" action="" method="post" novalidate>
+                {% csrf_token %}
+                {% include 'includes/form.html' %}
+
+                <div class="form-group">
+                  <div class="col-md-12 col-sm-3">
+                    <button type="submit" class="btn btn-primary btn-rounded">Submit</button>
+
+                  </div>
+                </div>
+            </div>
             </form>
           </div>
         </div>
