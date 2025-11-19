@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    image: my-django-app:latest
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+      - USE_SQLITE=true
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
